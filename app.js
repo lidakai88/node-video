@@ -22,7 +22,7 @@ app.use(
 );
 
 // 设置允许跨域访问该服务.
-app.all('*', function(req, res, next) {
+app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   //Access-Control-Allow-Headers ,可根据浏览器的F12查看,把对应的粘贴在这里就行
   res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -33,24 +33,16 @@ app.all('*', function(req, res, next) {
 
 // 接口
 // 获取摄像头列表
-app.post('/ipcList', function(req, res) {
-  console.log(JSON.stringify(req.body.rtsp));
+app.post('/ipcList', function (req, res) {
+  // console.log(JSON.stringify(req.body.rtsp));
 
   res.send(ipcList);
 });
 
 // 历史播放接口
 var hisPlay = null;
-// var hisRtsp = 'rtsp://admin:jidian123@172.16.151.230:554/Streaming/tracks/1001?starttime=20190917t221010z&endtime=20190917t221030z&playType=his'
-// const options = {
-//     name: 'streamNameHis' + Date.parse(new Date()),
-//     url: hisRtsp,
-//     wsPort: 9999
-// }
 
-// hisPlay = new Stream(options);
-// hisPlay.start();
-app.post('/getHis', function(req, res) {
+app.post('/getHis', function (req, res) {
   console.log(JSON.stringify(req.body.channel));
   var channel = req.body.channel;
 
@@ -62,7 +54,7 @@ app.post('/getHis', function(req, res) {
   if (hisPlay != null) {
     hisPlay.stop();
   }
-  callfile.exec('sh stopHis.sh', null, function(err, stdout, stderr) {
+  callfile.exec('sh stopHis.sh', null, function (err, stdout, stderr) {
     setTimeout(() => {
       const options = {
         name: 'streamNameHis' + Date.parse(new Date()),
@@ -96,20 +88,13 @@ function HkIpcInit(nvr, num) {
   for (let i = 1; i <= num; i++) {
     let data = {
       rtsp:
-        'rtsp://' +
-        nvr +
-        '/h264/ch' +
-        parseInt(i + 32) +
-        '/' +
-        sub +
-        '/av_stream',
+        'rtsp://admin:qwe12345@27.223.8.122:8099/Streaming/channels/1801',
       name: '通道' + i,
       channel: i,
-      type: '海康NVR',
+      type: '测试摄像头',
       coverSrc: 'https://www.jlrbjb.com/uploads/20180818065b77fc008e5b5.jpg',
       port: i
     };
-    console.log(data);
     ipcList.push(data);
   }
 }
@@ -134,7 +119,7 @@ function DhIpcInit(nvr, num) {
     ipcList.push(data);
   }
 }
-HkIpcInit(hkNVR1, 15);
+HkIpcInit(hkNVR1, 1);
 HkIpcInit(hkNVR, 4);
 DhIpcInit(dhNVR, 10);
 
@@ -156,7 +141,7 @@ if (restart == true) {
   setInterval(() => {
     // 定时kill ffmpeg
 
-    callfile.exec('sh stop.sh', null, function(err, stdout, stderr) {
+    callfile.exec('sh stop.sh', null, function (err, stdout, stderr) {
       console.log(stdout);
       // 关闭websocker端口
       for (var i = 0; i < ipcList.length; i++) {
