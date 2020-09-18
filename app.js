@@ -120,8 +120,8 @@ function DhIpcInit(nvr, num) {
   }
 }
 HkIpcInit(hkNVR1, 1);
-HkIpcInit(hkNVR, 4);
-DhIpcInit(dhNVR, 10);
+HkIpcInit(hkNVR, 0);
+DhIpcInit(dhNVR, 0);
 
 // 启动实时播放任务
 for (var i = 0; i < ipcList.length; i++) {
