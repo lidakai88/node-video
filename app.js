@@ -85,18 +85,43 @@ var playList = [];
 var ipcList = [];
 
 function HkIpcInit(nvr, num) {
-  for (let i = 1; i <= num; i++) {
-    let data = {
-      rtsp:
-        'rtsp://admin:qwe12345@27.223.8.122:8099/Streaming/channels/1801',
-      name: '通道' + i,
-      channel: i,
-      type: '测试摄像头',
-      coverSrc: 'https://www.jlrbjb.com/uploads/20180818065b77fc008e5b5.jpg',
-      port: i
-    };
-    ipcList.push(data);
-  }
+  // for (let i = 1; i <= num; i++) {
+  //   let data = {
+  //     rtsp:
+  //       'rtsp://admin:qwe12345@27.223.8.122:8099/Streaming/channels/1801',
+  //     name: '通道' + i,
+  //     channel: i,
+  //     type: '双元大学',
+  //     coverSrc: 'https://www.jlrbjb.com/uploads/20180818065b77fc008e5b5.jpg',
+  //     port: i
+  //   };
+  //   ipcList.push(data);
+  // }
+
+  let data1 = {
+    rtsp:
+      'rtsp://admin:qwe12345@27.223.8.122:8099/Streaming/channels/1801',
+    name: '视频1',
+    channel: 1,
+    type: '双元大学',
+    coverSrc: 'https://www.jlrbjb.com/uploads/20180818065b77fc008e5b5.jpg',
+    port: 1
+  };
+
+  let data2 = {
+    rtsp:
+      'rtsp://admin:qwe12345@27.223.8.122:8099/Streaming/channels/201',
+    name: '视频2',
+    channel: 2,
+    type: '生态园公园',
+    coverSrc: 'https://www.jlrbjb.com/uploads/20180818065b77fc008e5b5.jpg',
+    port: 2
+  };
+
+  ipcList.push(data1);
+  ipcList.push(data2);
+
+
 }
 
 function DhIpcInit(nvr, num) {
